@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-import Cart from "./components/Cart.jsx";
-import Items from "./components/Items.jsx";
-import ItemDetail from "./components/ItemDetail.jsx";
+import Cart from './components/Cart.jsx';
+import Items from './components/Items.jsx';
+import ItemDetail from './components/ItemDetail.jsx';
+import Admin from './components/Admin.jsx';
 
 export default function App() {
   const [items, setItems] = useState([]);
@@ -11,7 +12,7 @@ export default function App() {
   const [selectedItemIndex, setSelectedItem] = useState();
 
   const addToCart = (item, quantity) => {
-    let cartItem = { quantity, ...item };
+    const cartItem = { quantity, ...item };
     setCart([cartItem, ...cart]);
   };
 
@@ -20,7 +21,7 @@ export default function App() {
   };
 
   const getItems = () => {
-    axios.get("/items").then((result) => {
+    axios.get('/items').then((result) => {
       console.log(result);
       setItems(result.data.items);
     });
@@ -40,6 +41,7 @@ export default function App() {
         )}
         <ItemDetail item={selectedItem} addToCart={addToCart} />
         <Cart items={cart} />
+        <Admin items={items} setItems={setItems} />
       </div>
     </div>
   );
